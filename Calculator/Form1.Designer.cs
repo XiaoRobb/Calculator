@@ -57,8 +57,10 @@
             this.button_0 = new System.Windows.Forms.Button();
             this.button_dot = new System.Windows.Forms.Button();
             this.button_equal = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.button_eryuan = new System.Windows.Forms.Button();
+            this.button_erci = new System.Windows.Forms.Button();
+            this.label_erci = new System.Windows.Forms.Label();
+            this.label_er = new System.Windows.Forms.Label();
             this.label_eryuan = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -495,44 +497,74 @@
             this.button_equal.UseVisualStyleBackColor = false;
             this.button_equal.Click += new System.EventHandler(this.button_equal_Click);
             // 
-            // button1
+            // button_eryuan
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(26)))), ((int)(((byte)(26)))));
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("楷体", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(12, 279);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(236, 93);
-            this.button1.TabIndex = 34;
-            this.button1.Text = "ax+by=c dx+ey=f";
-            this.button1.UseVisualStyleBackColor = false;
+            this.button_eryuan.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(26)))), ((int)(((byte)(26)))));
+            this.button_eryuan.FlatAppearance.BorderSize = 0;
+            this.button_eryuan.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_eryuan.Font = new System.Drawing.Font("楷体", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button_eryuan.ForeColor = System.Drawing.Color.White;
+            this.button_eryuan.Location = new System.Drawing.Point(12, 279);
+            this.button_eryuan.Name = "button_eryuan";
+            this.button_eryuan.Size = new System.Drawing.Size(236, 93);
+            this.button_eryuan.TabIndex = 34;
+            this.button_eryuan.Text = "ax+by=c dx+ey=f";
+            this.button_eryuan.UseVisualStyleBackColor = false;
+            this.button_eryuan.Click += new System.EventHandler(this.button_eryuan_Click);
             // 
-            // button3
+            // button_erci
             // 
-            this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(26)))), ((int)(((byte)(26)))));
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("楷体", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(254, 279);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(236, 93);
-            this.button3.TabIndex = 36;
-            this.button3.Text = "ax²+bx+c=0";
-            this.button3.UseVisualStyleBackColor = false;
+            this.button_erci.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(26)))), ((int)(((byte)(26)))));
+            this.button_erci.FlatAppearance.BorderSize = 0;
+            this.button_erci.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_erci.Font = new System.Drawing.Font("楷体", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button_erci.ForeColor = System.Drawing.Color.White;
+            this.button_erci.Location = new System.Drawing.Point(254, 279);
+            this.button_erci.Name = "button_erci";
+            this.button_erci.Size = new System.Drawing.Size(236, 93);
+            this.button_erci.TabIndex = 36;
+            this.button_erci.Text = "ax²+bx+c=0";
+            this.button_erci.UseVisualStyleBackColor = false;
+            this.button_erci.Click += new System.EventHandler(this.button_erci_Click);
+            // 
+            // label_erci
+            // 
+            this.label_erci.AutoSize = true;
+            this.label_erci.Font = new System.Drawing.Font("宋体", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label_erci.ForeColor = System.Drawing.Color.White;
+            this.label_erci.Location = new System.Drawing.Point(80, 79);
+            this.label_erci.Name = "label_erci";
+            this.label_erci.Size = new System.Drawing.Size(317, 30);
+            this.label_erci.TabIndex = 37;
+            this.label_erci.Text = "__x² + __x + __ = 0";
+            this.label_erci.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label_erci.Visible = false;
+            // 
+            // label_er
+            // 
+            this.label_er.AutoSize = true;
+            this.label_er.Font = new System.Drawing.Font("宋体", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label_er.ForeColor = System.Drawing.Color.White;
+            this.label_er.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label_er.Location = new System.Drawing.Point(19, 166);
+            this.label_er.MaximumSize = new System.Drawing.Size(480, 0);
+            this.label_er.MinimumSize = new System.Drawing.Size(480, 0);
+            this.label_er.Name = "label_er";
+            this.label_er.Size = new System.Drawing.Size(480, 30);
+            this.label_er.TabIndex = 38;
+            this.label_er.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label_er.Visible = false;
             // 
             // label_eryuan
             // 
             this.label_eryuan.AutoSize = true;
             this.label_eryuan.Font = new System.Drawing.Font("宋体", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label_eryuan.ForeColor = System.Drawing.Color.White;
-            this.label_eryuan.Location = new System.Drawing.Point(71, 79);
+            this.label_eryuan.Location = new System.Drawing.Point(80, 125);
             this.label_eryuan.Name = "label_eryuan";
-            this.label_eryuan.Size = new System.Drawing.Size(333, 30);
-            this.label_eryuan.TabIndex = 37;
-            this.label_eryuan.Text = "__x² + __x + __ = __";
+            this.label_eryuan.Size = new System.Drawing.Size(253, 30);
+            this.label_eryuan.TabIndex = 39;
+            this.label_eryuan.Text = "__x + __y  = __";
             this.label_eryuan.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label_eryuan.Visible = false;
             // 
@@ -544,8 +576,10 @@
             this.ClientSize = new System.Drawing.Size(500, 780);
             this.ControlBox = false;
             this.Controls.Add(this.label_eryuan);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.label_er);
+            this.Controls.Add(this.label_erci);
+            this.Controls.Add(this.button_erci);
+            this.Controls.Add(this.button_eryuan);
             this.Controls.Add(this.button_equal);
             this.Controls.Add(this.button_dot);
             this.Controls.Add(this.button_0);
@@ -619,8 +653,10 @@
         private System.Windows.Forms.Button button_0;
         private System.Windows.Forms.Button button_dot;
         private System.Windows.Forms.Button button_equal;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button_eryuan;
+        private System.Windows.Forms.Button button_erci;
+        private System.Windows.Forms.Label label_erci;
+        private System.Windows.Forms.Label label_er;
         private System.Windows.Forms.Label label_eryuan;
     }
 }

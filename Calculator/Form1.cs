@@ -26,7 +26,8 @@ namespace Calculator
         private List<char> ops = new List<char>();
         private bool isERYuan = false; //是否是二元一次方程组模式
         private bool isERCi = false; //是否是一元二次方程模式
-        private double a, b, c, d, e, f;
+        private double a, b, c, d, f, g;
+        private int enterCount = 0;
         public Form1()
         {
             InitializeComponent();
@@ -133,8 +134,8 @@ namespace Calculator
             button_reciprocal.Enabled = true;
             Reset();
         }
-        private string ShowExp() //显示用户输入的表达式
-        {
+        private string ShowExp()
+        {//显示用户输入的表达式
             String exp = "";
             for(int i=0; i<numbers.Count; i++)
             {
@@ -149,7 +150,6 @@ namespace Calculator
             }
             return exp;
         }
-
         private double ToNumber(String num)
         {
             if (num.Contains("²") || num.Contains("³"))
@@ -200,7 +200,114 @@ namespace Calculator
             }
             result = tempResult;
         }
-
+        private void startERYuan()
+        {
+            isERYuan = true;
+            closeOp();
+            label_all.Visible = false;
+            label_erci.Text = "__x + __y  = __";
+            label_erci.Visible = true;
+            label_eryuan.Visible = true;
+            button_erci.Enabled = false;
+        }
+        private void endERYuan()
+        {
+            isERYuan = false;
+            label_all.Visible = true;
+            label_erci.Visible = false;
+            label_eryuan.Visible = false;
+            openEnter();
+            openOp();
+            button_equal.Enabled = true;
+            button_delete.Enabled = true;
+            button_clear_enter.Enabled = true;
+            button_eryuan.Enabled = true;
+            label_one.Visible = true;
+            label_er.Visible = false;
+            enterCount = 0;
+            button_erci.Enabled = true;
+            Reset();
+        }
+        private void startERCI()
+        {
+            isERCi = true;
+            closeOp();
+            label_all.Visible = false;
+            label_erci.Text = "__x² + __x + __ = 0";
+            label_erci.Visible = true;
+            button_eryuan.Enabled = false;
+        }
+        private void endERCI()
+        {
+            isERCi = false;   
+            label_all.Visible = true;
+            label_erci.Visible = false;
+            openEnter();
+            openOp();
+            button_equal.Visible = true;
+            button_delete.Enabled = true;
+            button_clear_enter.Enabled = true;
+            button_eryuan.Enabled = true;
+            label_one.Visible = true;
+            label_er.Visible = false;
+            enterCount = 0;
+            button_erci.Enabled = true;
+            Reset();
+        }
+        private void openEnter()
+        {
+            button_0.Enabled = true;
+            button_1.Enabled = true;
+            button_2.Enabled = true;
+            button_3.Enabled = true;
+            button_4.Enabled = true;
+            button_5.Enabled = true;
+            button_6.Enabled = true;
+            button_7.Enabled = true;
+            button_8.Enabled = true;
+            button_9.Enabled = true;
+            button_dot.Enabled = true;
+            isEntering = false;
+        }
+        private void closeEnter()
+        {
+            button_0.Enabled = false;
+            button_1.Enabled = false;
+            button_2.Enabled = false;
+            button_3.Enabled = false;
+            button_4.Enabled = false;
+            button_5.Enabled = false;
+            button_6.Enabled = false;
+            button_7.Enabled = false;
+            button_8.Enabled = false;
+            button_9.Enabled = false;
+            button_dot.Enabled = false;
+            isEntering = false;
+        }
+        private void openOp()
+        {
+            button_add.Enabled = true;
+            button_sub.Enabled = true;
+            button_mul.Enabled = true;
+            button_mod.Enabled = true;
+            button_reciprocal.Enabled = true;
+            button_sqrt.Enabled = true;
+            button_pow2.Enabled = true;
+            button_div.Enabled = true;
+            button_back.Enabled = true;
+        }
+        private void closeOp()
+        {
+            button_add.Enabled = false;
+            button_sub.Enabled = false;
+            button_mul.Enabled = false;
+            button_mod.Enabled = false;
+            button_reciprocal.Enabled = false;
+            button_sqrt.Enabled = false;
+            button_pow2.Enabled = false;
+            button_div.Enabled = false;
+            button_back.Enabled = false;
+        }
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
             point = new Point(e.X, e.Y);
@@ -227,6 +334,29 @@ namespace Calculator
         private void button_number_Click(object sender, EventArgs e)
         {
             Button button = (Button)sender;
+            if (isERCi)
+            {
+                if (isEntering) //已经输入了部分，将要继续输入
+                {
+                    if (button.Text != "." || !label_one.Text.Contains("."))  //不是. 或是还没有.，添加到尾部即可
+                    {
+                        label_one.Text += button.Text;
+                    }
+                }
+                else //之前还未输入，是开始新的输入
+                {
+                    if (button.Text == ".")  //
+                    {
+                        label_one.Text = "0.";
+                    }
+                    else
+                    {
+                        label_one.Text = button.Text;
+                    }
+                    isEntering = true;
+                }
+                return;
+            }
             if (isErrored)
             {
                 ErrorHandled();
@@ -290,11 +420,65 @@ namespace Calculator
 
         private void button_clear_Click(object sender, EventArgs e)
         {
+            if (isERCi)
+            {
+                label_erci.Text = "__x² + __x + __ = 0";
+                label_one.Text = "0";
+                isEntering = false;
+                enterCount = 0;
+                button_equal.Enabled = true;
+                button_clear_enter.Enabled = true;
+                button_delete.Enabled = true;
+                label_er.Visible = false;
+                label_one.Visible = true;
+                openEnter();
+                return;
+            }
+            if (isERYuan)
+            {
+                label_erci.Text = "__x + __y = __";
+                label_eryuan.Text = "__x + __y = __";
+                label_one.Text = "0";
+                isEntering = false;
+                enterCount = 0;
+                button_equal.Enabled = true;
+                button_clear_enter.Enabled = true;
+                button_delete.Enabled = true;
+                label_er.Visible = false;
+                label_one.Visible = true;
+                openEnter();
+                return;
+            }
             if (isErrored)
             {
                 ErrorHandled();
             }
             Reset();
+        }
+
+
+        private void button_erci_Click(object sender, EventArgs e)
+        {
+            if (isERCi)
+            {
+                endERCI();
+            }
+            else
+            {
+                startERCI();
+            }
+        }
+
+        private void button_eryuan_Click(object sender, EventArgs e)
+        {
+            if (isERYuan)
+            {
+                endERYuan();
+            }
+            else
+            {
+                startERYuan();
+            }
         }
 
         private void button_clear_enter_Click(object sender, EventArgs e)
@@ -367,39 +551,27 @@ namespace Calculator
         {
             Button button = (Button)sender;
             String op = button.Text;
-            if (isCalculated)  //已经计算过，只是更改运算符
-            {
+            if (isCalculated) { //已经计算过，只是更改运算符
                 ops.RemoveAt(ops.Count - 1);
                 nowOp = ops.Last();
                 label_all.Text = label_all.Text.Remove(label_all.Text.Length - 1) + op;
-            }
-            else //还未计算
-            {
-                if (isFirstClick)  //是第一次点
-                {
+            }else {//还未计算
+                if (isFirstClick) { //是第一次点
                     result = double.Parse(label_one.Text);
-                    if (isSingledClicked)  //点了单目运算符，直接在后面添加+，不用把输入数在添加进表达式显示框中，应为前面单目运算处理时已经添加过了
-                    {
+                    if (isSingledClicked) { //点了单目运算符，直接在后面添加+，不用把输入数在添加进表达式显示框中，应为前面单目运算处理时已经添加过了
                         label_all.Text += op;
-                    }
-                    else
-                    {
+                    }else {
                         label_all.Text += result.ToString() + op;
                         numbers.Add(label_one.Text);
                     }
                     isFirstClick = false;
-                }
-                else
-                {
+                }else {
                     DoFunc();
                     if (isErrored)
                         return;
                     if (isSingledClicked)
-                    {
                         label_all.Text += op;
-                    }
-                    else
-                    {
+                    else{
                         label_all.Text += label_one.Text + op;
                         numbers.Add(label_one.Text);
                     }
@@ -416,6 +588,106 @@ namespace Calculator
 
         private void button_equal_Click(object sender, EventArgs e)
         {
+            if (isERCi)
+            {
+                enterCount++;
+                switch (enterCount)
+                {
+                    case 1:
+                        a = double.Parse(label_one.Text);
+                        label_erci.Text = a.ToString() + " x² + __x + __ = 0";
+                        break;
+                    case 2:
+                        b = double.Parse(label_one.Text);
+                        label_erci.Text = a.ToString() + " x² + " + b.ToString() + " x + __ = 0";
+                        break;
+                    case 3:
+                        c = double.Parse(label_one.Text);
+                        label_erci.Text = a.ToString() + " x² + " + b.ToString() + " x + " + c.ToString() + " = 0";
+                        break;
+                    default:
+                        if ((b * b - 4 * a * c) < 0)
+                        {
+                            label_er.Text = "方程无解";
+                        }
+                        else
+                        {
+                            label_er.Text = "x₁ = " + Function.erci(a, b, c, 1).ToString() + " x₂ = " + Function.erci(a, b, c, 0);
+                        }
+                        label_er.Visible = true;
+                        label_one.Visible = false;
+                        button_equal.Enabled = false;
+                        button_clear_enter.Enabled = false;
+                        button_delete.Enabled = false;
+                        break;
+                }
+                isEntering = false;
+                if(enterCount == 3)
+                {
+                    closeEnter();
+                }
+                return;
+            }
+            if (isERYuan)
+            {
+                enterCount++;
+                switch (enterCount)
+                {
+                    case 1:
+                        a = double.Parse(label_one.Text);
+                        label_erci.Text = a.ToString() + " x + __y = __";
+                        break;
+                    case 2:
+                        b = double.Parse(label_one.Text);
+                        label_erci.Text = a.ToString() + " x + " + b.ToString() + " y = __";
+                        break;
+                    case 3:
+                        c = double.Parse(label_one.Text);
+                        label_erci.Text = a.ToString() + " x + " + b.ToString() + " y  = " + c.ToString();
+                        break;
+                    case 4:
+                        d = double.Parse(label_one.Text);
+                        label_eryuan.Text = d.ToString() + " x + __y = __";
+                        break;
+                    case 5:
+                        f = double.Parse(label_one.Text);
+                        label_eryuan.Text = d.ToString() + " x + " + f.ToString() + " y = __";
+                        break;
+                    case 6:
+                        g = double.Parse(label_one.Text);
+                        label_eryuan.Text = d.ToString() + " x + " + f.ToString() + " y  = " + g.ToString();
+                        break;
+                    default:
+                        if ((a * f - b * d) == 0)
+                        {
+                            if((b*g - c*f) == 0)
+                            {
+                                label_er.Text = "方程有无穷解";
+                            }
+                            else
+                            {
+                                label_er.Text = "方程无解";
+                            }
+                            
+                        }
+                        else
+                        {
+                            label_er.Text = "x = " + Function.eryuan(a, b, c, d, f, g, 1).ToString() + " y = " + Function.eryuan(a, b, c, d, f, g, 0);
+                        }
+                        label_er.Visible = true;
+                        label_one.Visible = false;
+                        button_equal.Enabled = false;
+                        button_clear_enter.Enabled = false;
+                        button_delete.Enabled = false;
+                        break;
+                }
+                isEntering = false;
+                if (enterCount == 7)
+                {
+                    closeEnter();
+                }
+                return;
+            }
             isEntering = false;    //是否处于输出状态中
             isCalculated = false; //是否已经计算
             isFirstClick = true;   //是否是第一次点击 + - x / %

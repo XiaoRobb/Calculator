@@ -37,5 +37,11 @@ namespace Calculator
 
         [DllImport("FunctionDll.dll", EntryPoint = "reciprocal", CallingConvention = CallingConvention.Cdecl)]
         public static extern double reciprocal(double a);
+
+        [DllImport("FunctionDll.dll", EntryPoint = "erci", CallingConvention = CallingConvention.Cdecl)]
+        public static extern double erci(double a, double b, double c, int positive);
+
+        [DllImport("FunctionDll.dll", EntryPoint = "eryuan", CallingConvention = CallingConvention.Cdecl)]
+        public static extern double eryuan(double a11, double a12, double b1, double a21, double a22, double b2, int flag);
     }
 }

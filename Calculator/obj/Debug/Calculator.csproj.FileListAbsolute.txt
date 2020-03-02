@@ -7,3 +7,4 @@ D:\AllProjects\C#\Calculator\Calculator\obj\Debug\Calculator.Properties.Resource
 D:\AllProjects\C#\Calculator\Calculator\obj\Debug\Calculator.csproj.GenerateResource.cache
 D:\AllProjects\C#\Calculator\Calculator\obj\Debug\Calculator.exe
 D:\AllProjects\C#\Calculator\Calculator\obj\Debug\Calculator.pdb
+D:\AllProjects\C#\Calculator\Calculator\obj\Debug\Calculator.csproj.CoreCompileInputs.cache
